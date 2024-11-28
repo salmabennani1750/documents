@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des Documents</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-top: 20px;
+    }
+
+    .document-category {
+      background-color: #fff;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #007BFF;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 10px 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #007BFF;
+    }
+  </style>
+</head>
+<body>
+  <h1>Liste des Documents</h1>
+  <div id="documents-container"></div>
+
+  <script>
+    // Données des fichiers
+    const files = {
+      "documents-classes": [
+        { name: "LatestAzure.png", url: "https://gestiondoc.blob.core.windows.net/documents-classes/LatestAZURE.png?sp=r&st=2024-11-27T17:02:32Z&se=2024-11-29T01:02:32Z&spr=https&sv=2022-11-02&sr=b&sig=1HwKeuI%2BiTxKOa6euv57SVt78%2BsVzD18yCGwZVQzn3U%3D" },
+        { name: "TESTexecuter.png", url: "https://gestiondoc.blob.core.windows.net/documents-classes/TESTexecuter.png?sp=r&st=2024-11-28T10:50:17Z&se=2024-11-30T18:50:17Z&spr=https&sv=2022-11-02&sr=b&sig=VsC4ACWvQ2l4xj77oIKudjUMDRXXdKPoUQc%2FpKcECDo%3D" }
+      ],
+      "documents-enseignants": [
+        { name: "TD DATAWAREHOUSE NEW.pdf", url: "https://gestiondoc.blob.core.windows.net/documents-enseignants/TD%20DATAWAREHOUSE%20NEW.pdf?sp=r&st=2024-11-28T10:43:18Z&se=2024-11-30T18:43:18Z&spr=https&sv=2022-11-02&sr=b&sig=4LVqR3gDdCuFe5azNDB3EDEWFTX%2FcCcLAELDRq7gkac%3D" },
+        { name: "Introduction vers les Big Data et chapitre 1.pdf", url: "https://gestiondoc.blob.core.windows.net/documents-enseignants/Introduction%20vers%20les%20Big%20Data%20et%20chapitre%201.pdf?sp=r&st=2024-11-28T10:48:39Z&se=2024-11-30T18:48:39Z&spr=https&sv=2022-11-02&sr=b&sig=jEXVsqeFuKHVyHSdZD5M0GZLaP6QNqKw4SOM2oie7LE%3D" }
+      ]
+    };
+
+    // Fonction pour afficher les documents
+    function renderDocuments() {
+      const container = document.getElementById('documents-container');
+      container.innerHTML = ''; // Vider le contenu précédent si nécessaire
+
+      // Parcourir chaque catégorie
+      for (const category in files) {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.classList.add('document-category');
+        
+        const categoryTitle = document.createElement('h2');
+        categoryTitle.textContent = category;
+        categoryDiv.appendChild(categoryTitle);
+
+        const ul = document.createElement('ul');
+
+        // Parcourir les fichiers de chaque catégorie
+        files[category].forEach(file => {
+          const li = document.createElement('li');
+          const link = document.createElement('a');
+          link.href = file.url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = file.name;
+          li.appendChild(link);
+          ul.appendChild(li);
+        });
+
+        categoryDiv.appendChild(ul);
+        container.appendChild(categoryDiv);
+      }
+    }
+
+    // Appeler la fonction pour afficher les documents au chargement de la page
+    window.onload = renderDocuments;
+  </script>
+</body>
+</html>
